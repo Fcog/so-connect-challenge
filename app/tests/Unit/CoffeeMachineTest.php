@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use Domain\BeansContainer;
 use Domain\CoffeeMachine;
+use Domain\Exceptions\NoBeansException;
+use Domain\Exceptions\NoWaterException;
 use Domain\StandardBeansContainer;
 use Domain\StandardWaterContainer;
 use Domain\WaterContainer;
@@ -31,6 +33,28 @@ class CoffeeMachineTest extends TestCase
         $litresMade = $coffeeMachine->makeDoubleEspresso();
 
         $this->assertEquals(0.10, $litresMade);
+    }
+
+    public function test_make_double_espresso_fails_with_no_beans(): void
+    {
+        $this->expectException(NoBeansException::class);
+
+        $beansContainer = new BeansContainer(10, 0);
+        $waterContainer = new WaterContainer(2, 2);
+        $coffeeMachine = new CoffeeMachine($beansContainer, $waterContainer);
+
+        $coffeeMachine->makeDoubleEspresso();
+    }
+
+    public function test_make_double_espresso_fails_with_no_water(): void
+    {
+        $this->expectException(NoWaterException::class);
+
+        $beansContainer = new BeansContainer(10, 2);
+        $waterContainer = new WaterContainer(2, 0);
+        $coffeeMachine = new CoffeeMachine($beansContainer, $waterContainer);
+
+        $coffeeMachine->makeDoubleEspresso();
     }
 
     public function test_show_status_add_beans_and_water(): void
