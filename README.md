@@ -6,7 +6,7 @@
 
 ```docker-compose up -d --build```
 
-- Bash into the environment:
+- Access docker shell:
 
 ```docker-compose exec php /bin/bash```
 
@@ -20,13 +20,24 @@
 
 ## Asumptions
 
-- The beans and water containers start full with the standard size.
+- The state initiallizes with the standard containers full.
 - The espressos left count is calculated using the normal espresso quantities.
 
 ## Endpoints
 
-GET http://localhost:8080/api/status
+| Endpoint            					   | Verb		| Path                       							|							|
+|-----------------------------| ----------| ------------------------------------------------------| --------------------------|
+| Get status				              | `GET`	| `http://localhost:8080/api/status`									|
+| Make espresso 						        | `POST`	| `http://localhost:8080/api/make-espresso`						| 
+| Make double espresso 						 | `POST`	| `http://localhost:8080/api/make-double-espresso`									|
 
-POST http://localhost:8080/api/make-espresso
 
-POST http://localhost:8080/api/make-double-espresso
+## Testing:
+
+- Access docker shell:
+
+```docker-compose exec php /bin/bash```
+
+- Run tests:
+
+```php artisan test```
