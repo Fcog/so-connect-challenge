@@ -1,3 +1,7 @@
+# SO Connect backend challenge
+
+[Challenge instructions](https://github.com/sowifi/backend-challenge)
+
 ## Prerequisites
 - Install Docker Desktop
 
@@ -20,7 +24,7 @@
 
 ## Asumptions
 
-- The state initiallizes with the standard containers full.
+- The state initializes with full standard containers.
 - The espressos left count is calculated using the normal espresso quantities.
 
 ## Endpoints
