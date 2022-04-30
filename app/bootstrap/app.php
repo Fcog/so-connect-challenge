@@ -11,6 +11,10 @@
 |
 */
 
+use Domain\CoffeeMachine;
+use Domain\StandardBeansContainer;
+use Domain\StandardWaterContainer;
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
@@ -40,6 +44,12 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
+
+$app->singleton(CoffeeMachine::class, function() {
+    $beanContainer = new StandardBeansContainer();
+    $waterContainer = new StandardWaterContainer();
+    return new CoffeeMachine($beanContainer, $waterContainer);
+});
 
 /*
 |--------------------------------------------------------------------------
