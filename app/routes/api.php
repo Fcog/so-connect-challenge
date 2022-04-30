@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\CoffeeMachineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/status', [CoffeeMachineController::class, 'getStatus']);
+Route::post('/make-espresso', [CoffeeMachineController::class, 'makeEspresso']);
+Route::post('/make-double-espresso', [CoffeeMachineController::class, 'makeDoubleEspresso']);
