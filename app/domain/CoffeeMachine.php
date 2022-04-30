@@ -85,4 +85,14 @@ class CoffeeMachine implements EspressoMachineInterface
 
         return min($leftWithBeansAvailable, $leftWithWaterAvailable);
     }
+
+    public function getWaterContainer(): WaterContainerInterface
+    {
+        return $this->waterContainer;
+    }
+
+    public function getBeansContainer(): BeansContainerInterface
+    {
+        return $this->beansContainer;
+    }
 }

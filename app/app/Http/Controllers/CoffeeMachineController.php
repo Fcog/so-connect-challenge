@@ -2,21 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Domain\CoffeeMachine;
 use \Domain\Exceptions\EspressoMachineException;
+use Illuminate\Support\Facades\DB;
 
 class CoffeeMachineController extends Controller
 {
-    public function getStatus()
+    public function getStatus(CoffeeMachine $coffeeMachine)
     {
-        return app(CoffeeMachine::class)->getStatus();
+        return $coffeeMachine->getStatus();
     }
 
-    public function makeEspresso()
+    public function makeEspresso(CoffeeMachine $coffeeMachine)
     {
         try {
-            app(CoffeeMachine::class)->makeEspresso();
+            $coffeeMachine->makeEspresso();
+
+            DB::table('coffee_machine')->updateOrInsert(
+                [
+                    'id' => 1,
+                ],
+                [
+                    'num_spoons' => $coffeeMachine->getBeansContainer()->getBeans(),
+                    'litres' => $coffeeMachine->getWaterContainer()->getWater(),
+                ]
+            );
+
             $statusCode = 204;
         } catch (EspressoMachineException) {
             $statusCode = 503;
@@ -25,10 +36,21 @@ class CoffeeMachineController extends Controller
         return response('', $statusCode);
     }
 
-    public function makeDoubleEspresso()
+    public function makeDoubleEspresso(CoffeeMachine $coffeeMachine)
     {
         try {
-            app(CoffeeMachine::class)->makeDoubleEspresso();
+            $coffeeMachine->makeDoubleEspresso();
+
+            DB::table('coffee_machine')->updateOrInsert(
+                [
+                    'id' => 1,
+                ],
+                [
+                    'num_spoons' => $coffeeMachine->getBeansContainer()->getBeans(),
+                    'litres' => $coffeeMachine->getWaterContainer()->getWater(),
+                ]
+            );
+
             $statusCode = 204;
         } catch (EspressoMachineException) {
             $statusCode = 503;
