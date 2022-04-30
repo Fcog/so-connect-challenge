@@ -21,6 +21,7 @@
 ## Asumptions
 
 - The beans and water containers start full with the standard size.
+- The espressos left count is calculated using the normal espresso quantities.
 
 ## Endpoints
 

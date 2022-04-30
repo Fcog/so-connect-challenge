@@ -16,6 +16,9 @@ class CoffeeMachine implements EspressoMachineInterface
     const DOUBLE_ESPRESSO_NUM_SPOONS = 2;
     const DOUBLE_ESPRESSO_LITRES = 0.10;
 
+    const MIN_THRESHOLD_NUM_SPOONS = 1;
+    const MIN_THRESHOLD_LITRES = 0.05;
+
     public function __construct(
         private BeansContainerInterface $beansContainer,
         private WaterContainerInterface $waterContainer
@@ -63,15 +66,16 @@ class CoffeeMachine implements EspressoMachineInterface
 
     public function getStatus(): string
     {
-        if ($this->beansContainer->getBeans() === 0 && $this->waterContainer->getWater() === 0.0) {
+        if ($this->beansContainer->getBeans() < self::MIN_THRESHOLD_NUM_SPOONS
+            && $this->waterContainer->getWater() < self::MIN_THRESHOLD_LITRES) {
             return 'Add beans and water';
         }
 
-        if ($this->beansContainer->getBeans() === 0) {
+        if ($this->beansContainer->getBeans() < self::MIN_THRESHOLD_NUM_SPOONS) {
             return 'Add beans';
         }
 
-        if ($this->waterContainer->getWater() === 0.0) {
+        if ($this->waterContainer->getWater() < self::MIN_THRESHOLD_LITRES) {
             return 'Add water';
         }
 
@@ -81,7 +85,7 @@ class CoffeeMachine implements EspressoMachineInterface
     private function getEspressosLeft(): int
     {
         $leftWithBeansAvailable = $this->beansContainer->getBeans() / self::ESPRESSO_NUM_SPOONS;
-        $leftWithWaterAvailable = $this->waterContainer->getWater() / self::ESPRESSO_LITRES;
+        $leftWithWaterAvailable = ceil($this->waterContainer->getWater() / self::ESPRESSO_LITRES);
 
         return min($leftWithBeansAvailable, $leftWithWaterAvailable);
     }
