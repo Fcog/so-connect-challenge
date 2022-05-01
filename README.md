@@ -53,8 +53,8 @@ App built with Laravel.
 
 ## Endpoints
 
-| Endpoint            					   | Verb		| Path                       							|
-|-----------------------------| ----------| ------------------------------------------------------|
-| Get status				              | `GET`	| `http://localhost:8080/api/status`									|
-| Make espresso 						        | `POST`	| `http://localhost:8080/api/make-espresso`						| 
-| Make double espresso 						 | `POST`	| `http://localhost:8080/api/make-double-espresso`									|
+| Endpoint            					   | Verb		| Path                       							                                                       |
+|-----------------------------| ----------|------------------------------------------------------------------------------------------|
+| Get status				              | `GET`	| [http://localhost:8080/api/status](http://localhost:8080/api/status)									            |
+| Make espresso 						        | `POST`	| [http://localhost:8080/api/make-espresso](http://localhost:8080/api/make-espresso)						 | 
+| Make double espresso 						 | `POST`	| [http://localhost:8080/api/make-double-espresso](http://localhost:8080/api/make-double-espresso)									                              |
